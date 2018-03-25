@@ -1,32 +1,45 @@
+// Angular Modules
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule} from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
+// Routing
 import { AppRoutingModule } from './app-routing.module';
 
+// Root Component
 import { AppComponent } from './app.component';
 
 // Feature Module
-import { AuthModule } from './auth/auth.module';
-import { CoreModule } from './core/core.module';
-import { DashboardModule } from './dashboard/dashboard.module';
-import { Page404Component } from './page404.component';
-import { TestComponent } from './test.component';
+import { AuthModule } from './Modules/auth/auth.module';
+import { CoreModule } from './Modules/core/core.module';
+import { DashboardModule } from './Modules/dashboard/dashboard.module';
+import { Page404Component } from './Utils/Page404/page404.component';
 
+// Services
+import { RequestService } from './Services/request.service';
+import {AuthService} from './Services/auth.service';
+import {AuthGuardService} from './Services/auth-guard.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    Page404Component,
-    TestComponent,
+    Page404Component
   ],
   imports: [
     BrowserModule,
-    // AuthModule,
+    HttpClientModule,
+    FormsModule,
+    AuthModule,
     CoreModule,
-    // DashboardModule,
+    DashboardModule,
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [
+    RequestService,
+    AuthService,
+    AuthGuardService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

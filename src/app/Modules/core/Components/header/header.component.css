@@ -1,0 +1,11 @@
+.navbar .container .navbar-brand .navbar-item{
+  font-weight: bolder;
+}
+
+.navbar-menu{
+  background-color: #363636;
+}
+
+.navbar-item{
+  color: white;
+}

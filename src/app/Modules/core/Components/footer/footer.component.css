@@ -1,0 +1,15 @@
+.footer{
+   background-color: #363636;
+}
+
+.footer .container .content p{
+  color: white;
+}
+
+a:hover{
+  color: #3273dc;
+}
+
+strong{
+  color: white;
+}
