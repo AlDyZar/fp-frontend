@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { RequestService } from './request.service';
 import { HttpHeaders } from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class AuthService {
@@ -19,10 +20,16 @@ export class AuthService {
   login(body) {
     this.bindHttpHeaders({
       'Content-Type':  'application/json',
-      'Authorization': 'Bearer ' + localStorage.getItem('token')
     });
 
-    this.rest.post('/auth/login', body, this.HttpOptions);
+    return this.rest.post('/login', body, this.HttpOptions).map(resp => {
+      if (resp['data']['token']) {
+        localStorage.setItem('jwt-token', resp['data']['token']);
+      }
+      return resp;
+    }).catch(err => {
+      return Observable.throw(err);
+    });
   }
 
   logout() {
