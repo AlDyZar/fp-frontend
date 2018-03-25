@@ -5,32 +5,32 @@
         <h3 class="title has-text-grey">Register</h3>
         <p class="subtitle has-text-grey">Join the family.</p>
         <div class="box">
-          <form>
+          <form (ngSubmit)="registerForm.form.valid && submit()" #registerForm = "ngForm">
             <div class="field">
               <div class="control">
-                <input class="input is-large" type="name" placeholder="Your Username" autofocus="">
+                <input class="input is-large" type="name" placeholder="Your Username" autofocus="" name="name" [(ngModel)]="model.name" #name = "ngModel">
               </div>
             </div>
 
             <div class="field">
               <div class="control">
-                <input class="input is-large" type="email" placeholder="Your Email" autofocus="">
+                <input class="input is-large" type="email" placeholder="Your Email" autofocus="" name="email" [(ngModel)]="model.email" #name = "ngModel">
               </div>
             </div>
 
             <div class="field">
               <div class="control">
-                <input class="input is-large" type="password" placeholder="Your Password">
+                <input class="input is-large" type="password" placeholder="Your Password" name="password" [(ngModel)]="model.password" #password = "ngModel">
               </div>
             </div>
 
             <div class="field">
               <div class="control">
-                <input class="input is-large" type="confirm-password" placeholder="Confirm Password">
+                <input class="input is-large" type="confirm-password" placeholder="Confirm Password" name="password2" [(ngModel)]="model.password2" #password2 = "ngModel">
               </div>
             </div>
 
-            <button class="button is-block is-info is-large is-fullwidth">Register</button>
+            <button class="button is-block is-info is-large is-fullwidth" [disabled]="enabled">Register</button>
           </form>
         </div>
         <p class="has-text-grey">

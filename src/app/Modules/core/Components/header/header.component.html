@@ -20,15 +20,45 @@
         <!--</a>-->
       <!--</div>-->
       <div class="navbar-end">
-        <a class="navbar-item" routerLink="auth/login">
-          Login
-        </a>
-        <a class="navbar-item">
-          Dashboard
-        </a>
-        <a class="navbar-item">
-          Logout
-        </a>
+
+          <a class="navbar-item" routerLink="auth/register" *ngIf="!isAuthenticated">
+            <span class="icon">
+              <i class="fa fa-user-plus"></i>
+            </span>
+            <span>
+              Register
+            </span>
+          </a>
+
+          <a class="navbar-item" routerLink="auth/login" *ngIf="!isAuthenticated">
+            <span class="icon">
+              <i class="fa fa-user"></i>
+            </span>
+            <span>Login</span>
+          </a>
+
+        <span class="navbar-item" *ngIf="isAuthenticated">
+          Hello {{name}}
+        </span>
+
+          <a class="navbar-item" routerLink="dashboard" *ngIf="isAuthenticated">
+            <span class="icon">
+              <i class="fa fa-columns"></i>
+            </span>
+            <span>
+              Dashboard
+            </span>
+          </a>
+
+          <a class="navbar-item" (click)="logout()" *ngIf="isAuthenticated">
+            <span>
+              <i class="fa fa-sign-out"></i>
+            </span>
+            <span>
+              Logout
+            </span>
+          </a>
+
       </div>
     </div>
   </div>

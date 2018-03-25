@@ -5,11 +5,8 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './core.component.html',
 })
 export class CoreComponent implements OnInit{
-  title = 'app';
 
-  constructor(){
-    this.navbarToggle();
-  }
+  constructor() {}
 
   ngOnInit() {
     this.navbarToggle();
