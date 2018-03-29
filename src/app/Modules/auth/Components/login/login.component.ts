@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../../../../Services/auth.service';
 import { Router } from '@angular/router';
 
@@ -7,9 +7,10 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
   public model: any = {};
+  public errors= [];
   public enabled = false;
 
   constructor(private auth: AuthService, private router: Router) { }
@@ -17,15 +18,23 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
+  ngOnDestroy() {
+
+  }
+
   submit()  {
     this.enabled = true;
     this.auth.login(this.model).subscribe(
       resp => {
-        console.log(resp);
         this.enabled = false;
         this.router.navigateByUrl('/');
       }, err => {
-        console.log(err);
+        this.errors = [];
+        for (let key in err['error']) {
+          for (let i = 0; i < err['error'][key].length; i++) {
+            this.errors.push(err['error'][key][i]);
+          }
+        }
         this.enabled = false;
       }
     );

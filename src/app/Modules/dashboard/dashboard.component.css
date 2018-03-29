@@ -1,0 +1,17 @@
+.dashboard-nav, .dashboard{
+  padding: 25px;
+}
+
+.dashboard-nav{
+  background: #363636;
+}
+
+.columns{
+  margin-top: 0px;
+}
+
+@media screen and (max-width: 768px){
+  .hero.is-fullheight{
+    min-height: 0;
+  }
+}

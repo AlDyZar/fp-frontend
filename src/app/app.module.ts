@@ -23,6 +23,7 @@ import { Page404Component } from './Utils/Page404/page404.component';
 import { RequestService } from './Services/request.service';
 import {AuthService} from './Services/auth.service';
 import {AuthGuardService} from './Services/auth-guard.service';
+import {ProductListService} from './Services/product-list.service';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import {AuthGuardService} from './Services/auth-guard.service';
   providers: [
     RequestService,
     AuthService,
-    AuthGuardService
+    AuthGuardService,
+    ProductListService
   ],
   bootstrap: [AppComponent]
 })

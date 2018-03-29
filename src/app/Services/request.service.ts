@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { HttpResponse } from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 
@@ -7,22 +7,33 @@ import {Observable} from 'rxjs/Observable';
 export class RequestService {
 
   private apiurl = 'http://localhost:8000/api';
+  private HttpOptions;
 
   constructor(private http: HttpClient) { }
 
+  bindHttpHeaders(headers) {
+    this.HttpOptions = {
+      headers: new HttpHeaders(headers)
+    };
+  }
+
   get(route, headers) {
-    return this.http.get<{}>(this.apiurl + route, headers);
+    this.bindHttpHeaders(headers);
+    return this.http.get<{}>(this.apiurl + route, this.HttpOptions);
   }
 
   post(route, body, headers) {
-    return this.http.post<{}>(this.apiurl + route, body, headers);
+    this.bindHttpHeaders(headers);
+    return this.http.post<{}>(this.apiurl + route, body, this.HttpOptions);
   }
 
   patch(route, body, headers) {
-    return this.http.post<{}>(this.apiurl + route, body, headers);
+    this.bindHttpHeaders(headers);
+    return this.http.post<{}>(this.apiurl + route, body, this.HttpOptions);
   }
 
   delete(route, headers) {
-    return this.http.delete<{}>(this.apiurl + route, headers);
+    this.bindHttpHeaders(headers);
+    return this.http.delete<{}>(this.apiurl + route, this.HttpOptions);
   }
 }

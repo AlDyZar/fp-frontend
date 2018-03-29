@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../../../Services/auth.service';
+import {ProductListService} from '../../../../Services/product-list.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -9,21 +11,30 @@ import {AuthService} from '../../../../Services/auth.service';
 export class HeaderComponent implements OnInit {
 
   public isAuthenticated = false;
-  public name;
+  public username;
+  public resp = false;
+  public searchBody = '';
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService, private searchService: ProductListService, private router: Router) { }
 
   ngOnInit() {
-    console.log('init');
-    this.auth.validateToken().subscribe(resp => {
-      console.log(resp);
-      this.isAuthenticated = this.auth.isAuthenticated;
-    },
-      err => {
-        console.log(err);
-      });
-    this.isAuthenticated = this.auth.isAuthenticated;
-    this.name = this.auth.username;
+    this.isAuthenticated = false;
+    this.resp = false;
+    if (localStorage.getItem('jwt-token')) {
+      this.auth.validateToken().subscribe(resp => {
+          this.isAuthenticated = this.auth.isAuthenticated;
+          console.log(resp['data']['user']['name']);
+          this.username = resp['data']['user']['name'];
+        },
+        err => {
+          this.resp = true;
+          console.log(err);
+        }, () => {
+          this.resp = true;
+        });
+    } else {
+      this.resp = true;
+    }
   }
 
   logout() {
@@ -33,6 +44,15 @@ export class HeaderComponent implements OnInit {
       this.isAuthenticated = this.auth.isAuthenticated;
     },
       err => {
+      console.log(err);
+    });
+  }
+
+  search() {
+    this.searchService.search(this.searchBody).subscribe(resp => {
+      this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+        this.router.navigate(['/search']));
+    }, err => {
       console.log(err);
     });
   }

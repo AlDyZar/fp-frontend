@@ -1,0 +1,26 @@
+.has-bg-img{
+  background: url('../../../../../assets/bg.jpg');
+  background-position: center center;
+  background-repeat:  no-repeat;
+  background-attachment: fixed;
+  background-size:  cover;
+}
+
+.title, .subtitle{
+  color: white;
+}
+
+.container{
+  width: 100%;
+}
+
+.hero-body-modif {
+  padding: 10rem 5rem;
+}
+
+@media screen and (min-width: 769px) {
+  .hero.is-medium .hero-body-modif {
+    padding-bottom: 12rem;
+    padding-top: 14rem;
+  }
+}

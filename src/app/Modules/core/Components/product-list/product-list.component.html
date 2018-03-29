@@ -1,0 +1,48 @@
+<section class="section">
+  <div class="container">
+
+    <div class="has-text-centered" *ngIf="!resp['data']">
+      <h1 class="is-large">NO RESULT FOUND</h1>
+    </div>
+
+    <div class="columns" *ngIf="resp['data']">
+
+      <div class="column is-3" *ngFor="let data of resp['data']">
+        <div class="card">
+
+          <div class="card-image">
+            <figure class="image is-4by3">
+              <img [src]="'http://localhost/upload/' +  data['imageUrl']" alt="Placeholder image">
+            </figure>
+          </div>
+
+          <div class="card-header">
+            <p class="card-header-title">
+              {{data['name']}}
+            </p>
+          </div>
+
+          <div class="card-content">
+            <p><strong>Price: </strong> {{data['price']}}</p>
+          </div>
+
+          <div class="card-footer">
+            <a class="card-footer-item" [routerLink]="'/product/' + data['id']">
+              View Item
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <nav class="pagination is-centered" role="navigation" aria-label="pagination" *ngIf="resp['current_page']">
+      <ul class="pagination-list">
+        <li><button class="pagination-previous" *ngIf="prevPageNum" (click)="previousPage()">Previous</button></li>
+        <li><a class="pagination-link is-current" aria-current="page">{{resp['current_page']}}</a></li>
+        <li><button class="pagination-next" *ngIf="nextPageNum" (click)="nextPage()">Next page</button></li>
+      </ul>
+    </nav>
+  </div>
+</section>
