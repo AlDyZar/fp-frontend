@@ -3,23 +3,26 @@
     <div class="columns is-vcentered">
       <div class="column is-5">
         <figure class="image is-4by3" *ngIf="resp['id']">
-          <img [src]="'http://localhost/upload/' + resp['imageUrl']" alt="Description">
+          <img [src]="'https://resource.dyzdev.my.id/upload/' + resp['imageUrl']" alt="Description">
         </figure>
       </div>
-      <div class="column is-6 is-offset-1">
+      <div class="column is-6 is-offset-1" *ngIf="resp['id']">
 
-        <h1 class="title is-2" *ngIf="resp['id']">
+        <h1 class="title is-2">
           {{resp['name']}}
         </h1>
         <br>
-        <p class="has-text-centered" *ngIf="resp['id']">
-          <button class="button is-medium is-info is-outlined" (click)="addToCart()">
-            Add To Cart
-          </button>
+        <p class="has-text-centered">
+          {{resp['desc']}}
         </p>
-        <section class="content" *ngIf="resp['id']">
-            <strong>Price: </strong> {{resp['price']}}
-        </section>
+        <br>
+        <p class="content">
+          <strong>Price: </strong> {{resp['price']}}
+        </p>
+        <input type="number" [(ngModel)] = "nItem">
+        <button class="button is-medium is-info is-outlined" (click)="buyNow()">
+          Buy Now
+        </button>
 
       </div>
     </div>

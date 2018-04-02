@@ -25,10 +25,10 @@ const routes: Routes = [
         path: 'register',
         component: RegisterComponent
       },
-      {
-        path: 'reset',
-        component: ForgotPasswordComponent
-      }
+      // {
+      //   path: 'reset',
+      //   component: ForgotPasswordComponent
+      // }
     ]
   }
 ];

@@ -33,7 +33,7 @@
       <!--</div>-->
       <div class="navbar-end" *ngIf="resp">
 
-          <a class="navbar-item" routerLink="auth/register" *ngIf="!isAuthenticated">
+          <a class="navbar-item" routerLink="/auth/register" *ngIf="!isAuthenticated">
             <span class="icon">
               <i class="fa fa-user-plus"></i>
             </span>
@@ -42,7 +42,7 @@
             </span>
           </a>
 
-          <a class="navbar-item" routerLink="auth/login" *ngIf="!isAuthenticated">
+          <a class="navbar-item" routerLink="/auth/login" *ngIf="!isAuthenticated">
             <span class="icon">
               <i class="fa fa-user"></i>
             </span>
@@ -53,7 +53,7 @@
           Hello&nbsp;<strong style="color: white">{{ username }}</strong>
         </span>
 
-          <a class="navbar-item" routerLink="dashboard" *ngIf="isAuthenticated">
+          <a class="navbar-item" routerLink="/dashboard" *ngIf="isAuthenticated">
             <span class="icon">
               <i class="fa fa-columns"></i>
             </span>

@@ -24,6 +24,7 @@ import { RequestService } from './Services/request.service';
 import {AuthService} from './Services/auth.service';
 import {AuthGuardService} from './Services/auth-guard.service';
 import {ProductListService} from './Services/product-list.service';
+import {DashboardService} from './Services/dashboard.service';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import {ProductListService} from './Services/product-list.service';
     RequestService,
     AuthService,
     AuthGuardService,
-    ProductListService
+    ProductListService,
+    DashboardService
   ],
   bootstrap: [AppComponent]
 })

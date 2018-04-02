@@ -8,8 +8,7 @@ export class AuthService {
 
   public isAuthenticated = false;
   private HttpHeaders;
-  public username;
-  public email;
+  public data: any = {};
 
   constructor(private rest: RequestService) { }
 
@@ -19,11 +18,10 @@ export class AuthService {
     };
 
     return this.rest.post('/login', body, this.HttpHeaders).map(resp => {
-      if (resp['data']['token']) {
-        this.username = resp['data']['user']['name'];
-        this.email = resp['data']['user']['email'];
+      if (resp['token']) {
+        this.data = resp['user'];
         this.isAuthenticated = true;
-        localStorage.setItem('jwt-token', resp['data']['token']);
+        localStorage.setItem('jwt-token', resp['token']);
       }
       return resp;
     }).catch(err => {
@@ -39,11 +37,8 @@ export class AuthService {
     localStorage.removeItem('jwt-token');
     return this.rest.get('/logout', this.HttpHeaders).map(
       resp => {
-        if (resp['status']) {
-          this.isAuthenticated = false;
-          this.username = null;
-          this.email = null;
-        }
+        this.isAuthenticated = false;
+        this.data = {};
         return resp;
       }
     ).catch(err => {
@@ -70,22 +65,24 @@ export class AuthService {
   }
 
   validateToken() {
-    console.log(localStorage.getItem('jwt-token'));
+
     this.HttpHeaders = {
       'Content-Type':  'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem('jwt-token')
     };
+
     return this.rest.get('/user', this.HttpHeaders).map(
       resp => {
         console.log(resp);
-        if (resp['data']['user']) {
-          this.username = resp['data']['user']['name'];
-          this.email = resp['data']['user']['email'];
+        if (resp['user']) {
+          this.data = resp['user'];
           this.isAuthenticated = true;
         }
         return resp;
       }
     ).catch(err => {
+      localStorage.removeItem('jwt-token');
+      this.isAuthenticated = false;
       return Observable.throw(err);
     });
   }

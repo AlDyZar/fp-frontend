@@ -1,3 +1,61 @@
-<p>
-  account works!
-</p>
+<h1 class="title has-text-grey">Profile</h1>
+
+<div class="message is-danger" *ngIf="errors.length > 0">
+  <div class="message-body">
+    <ul *ngFor="let error of errors">
+      <li>{{error}}</li>
+    </ul>
+  </div>
+</div>
+
+<form (ngSubmit)="updateForm.form.valid && submit()" #updateForm = "ngForm" *ngIf="valid">
+  <div class="field">
+    <div class="control">
+      <input class="input is-large" type="text" placeholder="First Name" [value]="model.name" autofocus="" name="name" [(ngModel)]="model.name" #name = "ngModel">
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="control">
+      <input class="input is-large" type="text" placeholder="Last Name" [value]="model.last_name" autofocus="" name="last_name" [(ngModel)]="model.last_name" #last_name = "ngModel">
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="control">
+      <input class="input is-large" type="email" placeholder="Email" [value]="model.email" autofocus="" name="email" [(ngModel)]="model.email" #nemail = "ngModel">
+    </div>
+  </div>
+
+  <!--<div class="field">-->
+    <!--<div class="control">-->
+      <!--<input class="input is-large" type="password" placeholder="New Password" [value]="model.password" name="password" [(ngModel)]="model.password" #password = "ngModel">-->
+    <!--</div>-->
+  <!--</div>-->
+
+  <div class="field">
+    <div class="control">
+      <input class="input is-large" type="text" placeholder="Address" [value]="model.address" name="address" [(ngModel)]="model.address" #address = "ngModel">
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="control">
+      <input class="input is-large" type="text" placeholder="City" [value]="model.city" name="city" [(ngModel)]="model.city" #city = "ngModel">
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="control">
+      <input class="input is-large" type="text" placeholder="Postal Code" [value]="model['postal code']" name="postal_code" [(ngModel)]="model.postal_code" #postal_code = "ngModel">
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="control">
+      <input class="input is-large" type="text" placeholder="Phone" [value]="model.phone" name="phone" [(ngModel)]="model.phone" #phone = "ngModel">
+    </div>
+  </div>
+
+  <button class="button is-block is-info is-large is-fullwidth" [disabled]="!enabled">Update</button>
+</form>

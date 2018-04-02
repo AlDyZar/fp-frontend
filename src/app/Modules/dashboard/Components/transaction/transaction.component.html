@@ -1,3 +1,20 @@
-<p>
-  transaction works!
-</p>
+<div class="table__wrapper">
+  <table class="table is-fullwidth">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Status</th>
+        <th>Total Price</th>
+        <th>Date & Time</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="datas.length > 0">
+      <tr *ngFor="let data of datas">
+        <td>{{data['id']}}</td>
+        <td>{{data['status']}}</td>
+        <td>{{data['total']}}</td>
+        <td>{{data['created_at']}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

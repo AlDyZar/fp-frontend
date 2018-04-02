@@ -1,18 +1,18 @@
 <section class="section">
   <div class="container">
 
-    <div class="has-text-centered" *ngIf="!resp['data']">
+    <div class="has-text-centered" *ngIf="!searchFound">
       <h1 class="is-large">NO RESULT FOUND</h1>
     </div>
 
-    <div class="columns" *ngIf="resp['data']">
+    <div class="columns" *ngIf="searchFound">
 
-      <div class="column is-3" *ngFor="let data of resp['data']">
+      <div class="column" *ngFor="let data of resp">
         <div class="card">
 
           <div class="card-image">
             <figure class="image is-4by3">
-              <img [src]="'http://localhost/upload/' +  data['imageUrl']" alt="Placeholder image">
+              <img [src]="'https://resource.dyzdev.my.id/upload/' +  data['imageUrl']" alt="Placeholder image">
             </figure>
           </div>
 
@@ -33,16 +33,16 @@
           </div>
 
         </div>
-      </div>
 
     </div>
 
-    <nav class="pagination is-centered" role="navigation" aria-label="pagination" *ngIf="resp['current_page']">
-      <ul class="pagination-list">
-        <li><button class="pagination-previous" *ngIf="prevPageNum" (click)="previousPage()">Previous</button></li>
-        <li><a class="pagination-link is-current" aria-current="page">{{resp['current_page']}}</a></li>
-        <li><button class="pagination-next" *ngIf="nextPageNum" (click)="nextPage()">Next page</button></li>
-      </ul>
-    </nav>
+    <!--<nav class="pagination is-centered" role="navigation" aria-label="pagination" *ngIf="searchFound">-->
+      <!--<ul class="pagination-list">-->
+        <!--<li><button class="pagination-previous" *ngIf="prevPageNum" (click)="previousPage()">Previous</button></li>-->
+        <!--<li><a class="pagination-link is-current" aria-current="page">{{resp['current_page']}}</a></li>-->
+        <!--<li><button class="pagination-next" *ngIf="nextPageNum" (click)="nextPage()">Next page</button></li>-->
+      <!--</ul>-->
+    <!--</nav>-->
+  </div>
   </div>
 </section>

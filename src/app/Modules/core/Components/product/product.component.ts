@@ -10,8 +10,9 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 export class ProductComponent implements OnInit {
 
   public resp: any = {};
+  public nItem = 1;
 
-  constructor(private product: ProductListService, private route: ActivatedRoute) { }
+  constructor(private product: ProductListService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
@@ -25,7 +26,24 @@ export class ProductComponent implements OnInit {
   }
 
   addToCart() {
-    window.alert('added');
+    this.product.addToCart(this.resp['id'], this.nItem).subscribe(resp => {
+      window.alert('Item Added');
+    }, err => {
+      window.alert('Please Login');
+      this.router.navigateByUrl('/auth/login');
+      console.log(err);
+    });
+  }
+
+  buyNow() {
+    this.product.buyNow(this.resp['id'], this.nItem).subscribe(resp => {
+      console.log(resp);
+      window.location.href = resp['url'];
+    }, err => {
+      window.alert('Please Login');
+      this.router.navigateByUrl('/auth/login');
+      console.log(err);
+    });
   }
 
 }

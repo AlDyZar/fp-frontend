@@ -6,24 +6,25 @@ import {Observable} from 'rxjs/Observable';
 export class ProductListService {
 
   public resp: any = {};
+  private HttpHeaders = {};
 
   constructor(private rest: RequestService) { }
 
   search(name) {
+    if (!name) {
+      return;
+    }
     name = name.trim();
-    name = name.replace(/ /g, '%20');
     if (name !== '') {
       return this.rest.get('/items?name=' + name, {}).map(resp => {
-        console.log(resp);
         resp['name'] = name;
         this.resp = resp;
-        // return this.resp;
+        return resp;
       }).catch(err => {
         return Observable.throw(err);
       });
     } else {
       return this.rest.get('/items', {}).map(resp => {
-        console.log(resp);
         this.resp = resp;
       }).catch(err => {
         return Observable.throw(err);
@@ -46,7 +47,7 @@ export class ProductListService {
       return this.rest.get('/items?name=' + name + '&page=' + page, {}).map(resp => {
         resp['name'] = name;
         this.resp = resp;
-        // return this.resp;
+        return resp;
       }).catch(err => {
         return Observable.throw(err);
       });
@@ -58,5 +59,35 @@ export class ProductListService {
         return Observable.throw(err);
       });
     }
+  }
+
+  addToCart(itemID, itemQty) {
+    this.HttpHeaders = {
+      'Content-Type':  'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem('jwt-token')
+    };
+    const body = {'item_id': itemID, 'qty': itemQty};
+    return this.rest.post('/cart/', body, this.HttpHeaders).map(resp => {
+      console.log(resp);
+    }).catch(err => {
+      return Observable.throw(err);
+    });
+  }
+
+  buyNow(itemID, itemQty) {
+    this.HttpHeaders = {
+      'Content-Type':  'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem('jwt-token')
+    };
+
+    const body = {
+      'item_id': itemID,
+      'qty': itemQty
+    };
+    return this.rest.post('/pay', body, this.HttpHeaders).map(resp => {
+      return resp;
+    }).catch(err => {
+      return Observable.throw(err);
+    });
   }
 }

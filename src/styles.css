@@ -2,3 +2,7 @@
 /*.has-bg-img{*/
   /*background: url('assets/rick-and-morty.jpg');*/
 /*}*/
+
+.table__wrapper {
+  overflow-x: auto;
+}

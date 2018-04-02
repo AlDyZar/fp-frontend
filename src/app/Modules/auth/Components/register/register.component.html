@@ -1,7 +1,7 @@
 <section class="hero is-dark is-fullheight">
   <div class="hero-body">
     <div class="container has-text-centered">
-      <div class="column is-4 is-offset-4">
+      <div class="column is-6 is-offset-3">
         <h3 class="title has-text-grey">Register</h3>
         <p class="subtitle has-text-grey">Join the family.</p>
         <div class="box">
@@ -41,7 +41,31 @@
 
             <div class="field">
               <div class="control">
-                <input class="input is-large" type="password" placeholder="Confirm Password" name="password2" [(ngModel)]="model.password2" #password2 = "ngModel">
+                <input class="input is-large" type="password" placeholder="Confirm Password" name="password_confirmation" [(ngModel)]="model.password_confirmation" #password_confirmation = "ngModel">
+              </div>
+            </div>
+
+            <div class="field">
+              <div class="control">
+                <input class="input is-large" type="text" placeholder="Address" name="address" [(ngModel)]="model.address" #address = "ngModel">
+              </div>
+            </div>
+
+            <div class="field">
+              <div class="control">
+                <input class="input is-large" type="text" placeholder="City" name="city" [(ngModel)]="model.city" #city = "ngModel">
+              </div>
+            </div>
+
+            <div class="field">
+              <div class="control">
+                <input class="input is-large" type="text" placeholder="Postal Code" name="postal_code" [(ngModel)]="model.postal_code" #postal_code = "ngModel">
+              </div>
+            </div>
+
+            <div class="field">
+              <div class="control">
+                <input class="input is-large" type="text" placeholder="Phone" name="phone" [(ngModel)]="model.phone" #phone = "ngModel">
               </div>
             </div>
 
@@ -50,7 +74,6 @@
         </div>
         <p class="has-text-grey">
           <a routerLink="../login">Login</a> &nbsp;·&nbsp;
-          <a routerLink="../reset">Forgot Password</a> &nbsp;·&nbsp;
           <a routerLink="/">Home</a>
         </p>
       </div>

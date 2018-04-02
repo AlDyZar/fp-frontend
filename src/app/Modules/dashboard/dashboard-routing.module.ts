@@ -29,14 +29,10 @@ const routes: Routes = [
         path: 'transaction',
         component: TransactionComponent
       },
-      {
-        path: 'history',
-        component: HistoryComponent
-      },
-      {
-        path: 'cart',
-        component: CartComponent
-      }
+      // {
+      //   path: 'cart',
+      //   component: CartComponent
+      // }
     ]
   }
 ];

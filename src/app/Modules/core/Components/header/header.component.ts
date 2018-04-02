@@ -23,14 +23,13 @@ export class HeaderComponent implements OnInit {
     if (localStorage.getItem('jwt-token')) {
       this.auth.validateToken().subscribe(resp => {
           this.isAuthenticated = this.auth.isAuthenticated;
-          console.log(resp['data']['user']['name']);
-          this.username = resp['data']['user']['name'];
+          console.log(resp['user']['name']);
+          this.username = resp['user']['name'];
+          this.resp = true;
         },
         err => {
           this.resp = true;
           console.log(err);
-        }, () => {
-          this.resp = true;
         });
     } else {
       this.resp = true;
@@ -49,12 +48,7 @@ export class HeaderComponent implements OnInit {
   }
 
   search() {
-    this.searchService.search(this.searchBody).subscribe(resp => {
-      this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
-        this.router.navigate(['/search']));
-    }, err => {
-      console.log(err);
-    });
+    this.router.navigate(['/search'], {queryParams:{search: this.searchBody}});
   }
 
 }

@@ -6,7 +6,7 @@ import {Observable} from 'rxjs/Observable';
 @Injectable()
 export class RequestService {
 
-  private apiurl = 'http://localhost:8000/api';
+  private apiurl = 'https://api.dyzdev.my.id/api'; // 'http://localhost:8000/api';
   private HttpOptions;
 
   constructor(private http: HttpClient) { }
@@ -29,7 +29,7 @@ export class RequestService {
 
   patch(route, body, headers) {
     this.bindHttpHeaders(headers);
-    return this.http.post<{}>(this.apiurl + route, body, this.HttpOptions);
+    return this.http.patch<{}>(this.apiurl + route, body, this.HttpOptions);
   }
 
   delete(route, headers) {

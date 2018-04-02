@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {FormsModule} from '@angular/forms';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
@@ -12,7 +13,8 @@ import { TransactionComponent } from './Components/transaction/transaction.compo
 @NgModule({
   imports: [
     CommonModule,
-    DashboardRoutingModule
+    DashboardRoutingModule,
+    FormsModule
   ],
   declarations: [DashboardComponent, AccountComponent, NavigationComponent, CartComponent, HistoryComponent, TransactionComponent]
 })

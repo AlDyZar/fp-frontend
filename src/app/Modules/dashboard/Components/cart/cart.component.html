@@ -1,3 +1,32 @@
-<p>
-  cart works!
-</p>
+<div class="table__wrapper">
+    <table class="table is-fullwidth">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Total</th>
+          <th>Options</th>
+        </tr>
+      </thead>
+      <tfoot *ngIf="datas.length > 0">
+        <tr>
+          <th>Total</th>
+          <th></th>
+          <th></th>
+          <th>{{total | number}}</th>
+          <th></th>
+        </tr>
+      </tfoot>
+      <tbody *ngIf="datas.length > 0">
+        <tr *ngFor="let data of datas">
+          <td>{{data['name']}}</td>
+          <td><input type="number" [value]="data['qty']"></td>
+          <td>{{data['price'] | number}}</td>
+          <td>{{data['qty'] * data['price'] | number}}</td>
+          <td><button class="button is-small is-info is-outlined">Update</button><button class="button is-small is-info is-outlined">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <button class="button is-medium is-info is-outlined" (click)="checkout()">Checkout</button>
+</div>
